@@ -11,3 +11,14 @@ export async function DELETE(req, { params }) {
     return NextResponse.json({ message: "error", error }, { status: 500 });
   }
 }
+
+export async function GET(req, { params }) {
+  try {
+    const { id } = params;
+    const foundTicket = await Ticket.findOne({ _id: id });
+
+    return NextResponse.json({ foundTicket }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ message: "error", error }, { status: 500 });
+  }
+}
