@@ -22,3 +22,18 @@ export async function GET(req, { params }) {
     return NextResponse.json({ message: "error", error }, { status: 500 });
   }
 }
+
+export async function PUT(req, { params }) {
+  try {
+    const { id } = params;
+    const body = await req.json();
+    const ticketData = body.formData;
+
+    const updatedTicket = await Ticket.findByIdAndUpdate(id, {
+      ...ticketData,
+    });
+    return NextResponse.json({ message: "Ticket Updated" }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ message: "error", error }, { status: 500 });
+  }
+}
